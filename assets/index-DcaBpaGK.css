@@ -16,3 +16,21 @@
 .ordem-capa-mosaico img{display:block;min-width:0;min-height:0}
 .ordem-capa-2{grid-template-rows:minmax(0,1fr)}
 .ordem-capa-3 img:first-child{grid-row:span 2}
+/* Produções de uma ordem */
+.ordem-producoes{margin:12px 0;border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.ordem-producoes h3{font-size:1rem;margin:0 0 8px}
+.producao-total{color:var(--muted);margin:0 0 8px;font-size:.875rem}
+.producao-acoes,.producao-cadastro{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.producao-cadastro input{flex:1;min-width:120px}
+.producao-tabela{width:100%;border-collapse:collapse;table-layout:fixed}
+.producao-tabela th,.producao-tabela td{text-align:left;padding:4px}
+.producao-tabela th:nth-child(2){width:34%;overflow-wrap:anywhere}
+.producao-tabela th:nth-child(3){width:42px}
+.producao-acao-label{position:absolute;clip-path:inset(50%);height:1px;width:1px;overflow:hidden}
+.producao-tabela input,.producao-tabela select,.producao-tabela textarea{width:100%;min-width:0}
+.producao-resumo td{font-weight:600;overflow-wrap:anywhere;border-top:1px solid var(--line)}
+.producao-detalhes{min-width:0;margin-bottom:5px}
+.producao-detalhes summary{cursor:pointer;padding:5px 0}
+.producao-detalhes label{display:grid;gap:4px;margin:4px 0 8px}
+.producao-notas{white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0 8px}
+.producao-remover.btn{min-width:34px;min-height:34px;padding:4px;justify-content:center}
