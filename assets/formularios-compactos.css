@@ -1,0 +1,40 @@
+/* Form density for desktop and touch screens */
+.app-shell :is(.main, .janela) :is(.field, .op-step) {
+  margin-bottom: 8px;
+}
+.app-shell :is(.main, .janela) .field > :is(label, span):first-child {
+  margin-bottom: 3px;
+}
+.app-shell :is(.main, .janela) .field :is(input:not([type=checkbox], [type=radio], [type=file]), select, textarea) {
+  border-radius: 8px;
+  padding: 6px 9px;
+}
+.app-shell :is(.main, .janela) .field :is(input:not([type=checkbox], [type=radio], [type=file]), select) {
+  min-height: 36px;
+}
+.app-shell :is(.main, .janela) .field textarea:not([rows]) {
+  min-height: 64px;
+  resize: vertical;
+}
+.app-shell :is(.main, .janela) .field input:is([type=date], [type=month], [type=time], [type=datetime-local]) {
+  max-width: 15rem;
+}
+.app-shell :is(.main, .janela) .field input:is([type=number], [inputmode=numeric], [inputmode=decimal], [type=tel]) {
+  max-width: 14rem;
+}
+.app-shell :is(.main, .janela) .field input.op-big-input {
+  height: auto;
+  font-size: 20px !important;
+}
+.app-shell :is(.main, .janela) :is(.row-2, .row-3) {
+  gap: 0 8px;
+}
+.app-shell .main .op-step-title { margin-bottom: 6px; }
+.app-shell .main .op-step .form-secao { margin-bottom: 8px; }
+@media (width <= 860px) {
+  .app-shell :is(.main, .janela) .field :is(input:not([type=checkbox], [type=radio], [type=file]), select) {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .app-shell :is(.main, .janela) .field textarea { font-size: 16px; }
+}
