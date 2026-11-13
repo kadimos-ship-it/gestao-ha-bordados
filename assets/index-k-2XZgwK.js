@@ -585,10 +585,10 @@ function hY(){let{machines:e,shifts:t,users:n,orders}=Wm(),[machineId,selectMach
   const canOrders=xp(user)||!!user?.permissions?.ordens;
   const report=canReport&&(!canOrders||new URLSearchParams(location.search).get('aba')==='relatorios');
   return V.jsxs(V.Fragment,{children:[
-    canOrders&&canReport&&V.jsxs('nav',{className:'tabs','aria-label':'Área de Ordens',children:[
-      V.jsx('button',{type:'button',className:report?'':'on',onClick:()=>navigate('/ordens'),children:'Ordens'}),
-      V.jsx('button',{type:'button',className:report?'on':'',onClick:()=>navigate('/ordens?aba=relatorios'),children:'Relatórios e exportação'})
-    ]}),
+    canOrders&&canReport&&V.jsx('div',{style:{marginBottom:10},children:
+      V.jsx(bn,{className:'btn ghost',to:report?'/ordens':'/ordens?aba=relatorios',
+        children:report?'Voltar às ordens':'Exportar e consultar relatórios'})
+    }),
     report?V.jsx(gye,{}):V.jsx(ZY,{})
   ]});
 }
