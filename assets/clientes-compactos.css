@@ -1,0 +1,36 @@
+/* Compact client directory. Client names can wrap without clipping. */
+.ordem-cards:has(> .ordem-card .cliente-avatar) {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 245px), 1fr));
+  gap: 6px;
+}
+.ordem-card:has(> .cliente-avatar) {
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  min-height: 48px;
+  border-radius: 9px;
+  box-shadow: none;
+}
+.ordem-card > .ordem-capa.cliente-avatar {
+  width: 30px;
+  height: 30px;
+  min-height: 0;
+  align-self: center;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.ordem-card:has(> .cliente-avatar) .ordem-linha1 {
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+.ordem-card:has(> .cliente-avatar) .ordem-linha1 strong {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.ordem-card:has(> .cliente-avatar) .ordem-meta { font-size: 12px; }
+@media (width <= 560px) {
+  .ordem-cards:has(> .ordem-card .cliente-avatar) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
