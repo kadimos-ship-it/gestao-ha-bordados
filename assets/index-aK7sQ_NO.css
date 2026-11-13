@@ -29,3 +29,44 @@
     outline-offset: 2px;
   }
 }
+
+@media (width <= 560px) {
+  .ordens .ordens-filtros { gap: 6px; margin-bottom: 8px; }
+  .ordens .ordem-cards { gap: 8px; }
+  .ordens .ordem-card {
+    grid-template-columns: 48px minmax(0, 1fr);
+    align-items: start;
+    gap: 4px 6px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+  .ordens .ordem-card .ordem-capa {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    align-self: start;
+    padding: 0;
+    border-radius: 8px;
+  }
+  .ordens .ordem-linha1,
+  .ordens .ordem-selos { gap: 0 3px; }
+  .ordens .ordem-linha1 strong { font-size: 14px; }
+  .ordens .ordem-info { gap: 0; }
+  .ordens .ordem-card .ordem-editar:not(.ordem-capa) {
+    padding: 3px 5px;
+    min-height: 36px;
+    font-size: 12px;
+  }
+  .ordens .ordem-linha3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 4px;
+  }
+  .ordens .ordem-datas { gap: 4px; }
+  .ordens .ordem-datas .ordem-editar { gap: 0; }
+  .ordens .ordem-ranking,
+  .ordens .ordem-card > div:has(> span[style*="display: grid"]) { display: none; }
+}
+@media (360px <= width <= 560px) {
+  .ordens .ordem-linha3 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
