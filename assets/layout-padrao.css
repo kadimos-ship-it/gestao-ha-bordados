@@ -1,0 +1,65 @@
+/* Shared navigation, forms and data density */
+.app-shell .main {
+  --ui-gap: 12px;
+  --ui-radius: 12px;
+}
+.app-shell .main .topbar {
+  gap: var(--ui-gap);
+  margin-bottom: 14px;
+}
+.app-shell .main .topbar h2 { margin-bottom: 4px; }
+.app-shell .main .section-title { margin-bottom: 8px; }
+.app-shell .main :is(.card, .form-secao) { border-radius: var(--ui-radius); }
+.app-shell .main :is(.grid-2, .grid-3, .grid-4) { gap: var(--ui-gap); }
+.app-shell .main .field { min-width: 0; margin-bottom: 10px; }
+.app-shell .main :is(.tabs, .abas, .chips-rolagem, .period-chips) {
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.app-shell .main :is(.tabs, .abas, .chips-rolagem, .period-chips) button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+.app-shell .main :is(.tabs, .abas, .chips-rolagem, .period-chips) button.on {
+  background: var(--green-800);
+  border-color: var(--green-800);
+  color: white;
+}
+.app-shell .main .form-secao > summary { padding: 10px 12px; }
+.app-shell .main .form-secao-corpo { padding-inline: 12px; }
+.app-shell .main .table-wrap { max-width: 100%; overflow-x: auto; }
+.app-shell .main table :is(th, td) { padding: 6px 8px; line-height: 1.35; }
+.app-shell .main table th { font-size: 12px; }
+.app-shell .main table td { font-size: 13px; }
+.app-shell .main table .btn { padding-inline: 8px; }
+.app-shell :is(a, button, summary, input, select, textarea):focus-visible {
+  outline: 2px solid #b85a16;
+  outline-offset: 2px;
+}
+@media (width > 860px) {
+  .app-shell .sidebar .nav { gap: 3px; }
+  .app-shell .sidebar .nav a { padding: 9px 10px; }
+}
+@media (width <= 860px) {
+  .app-shell .main { --ui-gap: 8px; }
+  .app-shell .main .topbar { flex-wrap: wrap; align-items: flex-start; }
+  .app-shell .main .topbar h2 { font-size: clamp(20px, 5.5vw, 25px); }
+  .app-shell .main .table-mobile-cards :is(tbody, tfoot) { gap: 6px; }
+  .app-shell .main .table-mobile-cards tr { padding: 4px 8px; }
+  .app-shell .main .table-mobile-cards td {
+    padding: 4px 0;
+    overflow-wrap: anywhere;
+  }
+  .app-shell .main .table-mobile-cards td[data-label]:not([colspan]) {
+    display: grid;
+    grid-template-columns: minmax(0, 34%) minmax(0, 1fr);
+    align-items: baseline;
+    gap: 6px;
+  }
+  .app-shell .main .table-mobile-cards td[data-label]::before {
+    position: static;
+    width: auto;
+    font-size: 11px;
+  }
+}
