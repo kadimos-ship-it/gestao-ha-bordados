@@ -1,0 +1,28 @@
+.ordem-card.ordem-finalizada {
+  border-inline-start: 4px solid #19805b;
+}
+
+.ordem-resultado-final {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #e7f5ed;
+  color: #124b35;
+  overflow-wrap: anywhere;
+}
+
+.ordem-resultado-final ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ordem-resultado-final li {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
