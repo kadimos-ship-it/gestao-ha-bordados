@@ -906,7 +906,7 @@ function OrderOperatorHistory({order,groups,machines}){
   if(!records?.size)return null;
   const date=value=>new Date(value).toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'});
   return V.jsxs('details',{style:{marginTop:3,minWidth:0,overflowWrap:'anywhere'},children:[
-    V.jsx('summary',{style:{cursor:'pointer',fontWeight:650,fontSize:12},children:'Histórico por operador ('+records.size+')'}),
+    V.jsx('summary',{style:{cursor:'pointer',fontWeight:650,fontSize:12},children:'Bordou: '+[...records.values()].map(record=>record.name).slice(0,2).join(', ')+(records.size>2?' +'+(records.size-2):'')}),
     ...[...records.values()].map(({name,turns},index)=>{
       const closed=turns.filter(shift=>shift.endAt);
       const quantity=closed.reduce((sum,shift)=>sum+(Number(shift.quantity)||0),0);
