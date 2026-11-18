@@ -42,3 +42,22 @@
   .ordens .ordem-card { grid-template-columns: 44px minmax(0,1fr); }
   .ordens .ordem-card .ordem-capa { width: 44px; height: 44px; min-height: 44px; }
 }
+
+/* Keep the orders list dense while leaving touch actions easy to reach. */
+.ordens .ordem-cards { gap: 6px; }
+.ordens .ordem-card { padding: 5px; gap: 3px 6px; }
+.ordens .ordem-meta { gap: 2px; font-size: 12px; }
+.ordens .ordem-linha3 { display:flex; flex-wrap:wrap; gap:2px 5px; }
+.ordens .ordem-card .ordem-editar:not(.ordem-capa) { font-size:12px; line-height:1.2; }
+.ordens .ordem-datas .ordem-editar { gap:0; }
+.ordens .ordem-bordadores, .ordens .ordem-resultado-final { padding:3px 6px; line-height:1.25; }
+.ordens .ordem-resultado-final li { gap:2px 6px; }
+@media (width > 860px) {
+  .ordens .ordem-cards { grid-template-columns: repeat(auto-fill,minmax(min(100%,235px),1fr)); }
+  .ordens .ordem-card { grid-template-columns: 46px minmax(0,1fr); }
+  .ordens .ordem-card .ordem-capa { width:46px; height:54px; }
+  .ordens .ordem-card .ordem-editar:not(.ordem-capa) { min-height:28px; }
+}
+@media (width <= 860px) {
+  .ordens .ordem-card .ordem-editar:not(.ordem-capa) { min-height:32px; }
+}
