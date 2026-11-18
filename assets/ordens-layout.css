@@ -25,3 +25,20 @@
 @media (width <= 560px) {
   .ordens .ordem-linha3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
 }
+
+.ordens .ordem-cards { gap: 8px; }
+.ordens .ordem-card { padding: 6px; gap: 4px 8px; border-radius: 10px; }
+.ordens .ordem-info { gap: 2px; }
+.ordens .ordem-card .ordem-editar:not(.ordem-capa) { padding: 2px 4px; min-height: 32px; }
+.ordens .ordem-linha1 strong { font-size: 14px; }
+.ordens .ordem-bordadores, .ordens .ordem-resultado-final { padding: 4px 6px; gap: 2px; font-size: 12px; }
+.ordens .ordem-datas { gap: 3px; }
+@media (width > 860px) {
+  .ordens .ordem-cards { grid-template-columns: repeat(auto-fill,minmax(min(100%,255px),1fr)); }
+  .ordens .ordem-card { grid-template-columns: 62px minmax(0,1fr); }
+  .ordens .ordem-card .ordem-capa { width: 62px; height: 72px; min-height: 0; align-self: start; }
+}
+@media (width <= 860px) {
+  .ordens .ordem-card { grid-template-columns: 44px minmax(0,1fr); }
+  .ordens .ordem-card .ordem-capa { width: 44px; height: 44px; min-height: 44px; }
+}
