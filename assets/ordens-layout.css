@@ -1,0 +1,27 @@
+.ordens .topbar h2 { font-size: clamp(24px, 3vw, 36px); }
+.ordens .topbar .btn { background: var(--green-800); color: white; }
+.ordens .chips-rolagem button { text-transform: capitalize; }
+.ordens .ordem-card { align-items: start; background: #fff; }
+.ordens .ordem-info { min-width: 0; }
+.ordens .ordem-linha1 { flex-wrap: wrap; gap: 2px; }
+.ordens .ordem-bordadores {
+  grid-column: 1 / -1;
+  padding: 5px 8px;
+  background: #edf7f0;
+  border-radius: 8px;
+  color: #164b34;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.ordens .ordem-bordadores strong { margin-inline-end: 6px; }
+.ordens .ordem-linha3 { grid-template-columns: repeat(2,minmax(0,1fr)); display: grid; gap: 4px; }
+.ordens .ordem-editar-geral { border: 1px solid var(--line); }
+.ordens .ordem-ranking { display: none; }
+@media (width > 860px) {
+  .ordens .ordem-cards { grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr)); }
+  .ordens .ordem-card { grid-template-columns: minmax(68px, 31%) minmax(0, 1fr); }
+  .ordens .ordem-card .ordem-capa { width: 100%; height: clamp(110px, 14vw, 200px); align-self: center; }
+}
+@media (width <= 560px) {
+  .ordens .ordem-linha3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
