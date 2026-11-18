@@ -1,0 +1,9 @@
+.producao-ficha { display:grid; gap:12px; margin-bottom:16px; }
+.producao-dados,.producao-acoes { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.producao-dados,.producao-total { padding:12px; border-radius:10px; background:#e7f5ed; color:#124b35; }
+.producao-acoes h4,.producao-artes { margin:0; }
+.producao-artes { list-style:none; padding:0; }
+.producao-artes li { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:8px 0; border-bottom:1px solid var(--line); }
+.producao-artes li > strong:first-of-type { flex:1 1 100px; overflow-wrap:anywhere; }
+.producao-artes img { width:55px; height:34px; border-radius:5px; object-fit:cover; }
+.janela:has(.producao-ficha) { width:min(980px,100%); max-width:980px; }
