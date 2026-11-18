@@ -61,3 +61,27 @@
 @media (width <= 860px) {
   .ordens .ordem-card .ordem-editar:not(.ordem-capa) { min-height:32px; }
 }
+
+/* The photo spans the card. Text and production controls share the second column. */
+.ordens .ordem-card { grid-template-rows: auto; align-content: start; }
+.ordens .ordem-card .ordem-capa {
+  grid-column: 1;
+  grid-row: 1 / span 4;
+  align-self: stretch;
+  width: 100%;
+  height: auto;
+  min-height: 48px;
+}
+.ordens .ordem-card .ordem-info,
+.ordens .ordem-card .ordem-resultado-final,
+.ordens .ordem-card .ordem-datas,
+.ordens .ordem-card > div:has(> span[style*="display: grid"]) {
+  grid-column: 2 !important;
+}
+.ordens .ordem-card:has(> .ordem-resultado-final):has(> div > span[style*="display: grid"]) .ordem-capa {
+  grid-row-end: span 5;
+}
+.ordens .ordem-datas .ordem-editar { min-width: 0; overflow-wrap: anywhere; }
+@media (width <= 560px) {
+  .ordens .ordem-card .ordem-datas { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
