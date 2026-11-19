@@ -1,0 +1,93 @@
+/* Gestão HA Bordados — shared interface */
+:root {
+  --ui-graphite: #151b1d;
+  --ui-lime: #c9fa78;
+  --ink: #192022;
+  --muted: #556163;
+  --paper: #eff1ef;
+  --line: #dce2de;
+  --shadow: 0 2px 4px #151b1d08;
+}
+
+.app-shell .main { --ui-radius: 18px; --ui-gap: 14px; }
+.app-shell .main .topbar h2 { font-weight: 750; letter-spacing: -.04em; }
+.app-shell .sidebar { background: var(--ui-graphite); }
+.app-shell .sidebar .nav a.active,
+.app-shell .bottom-nav .on {
+  background: var(--ui-lime);
+  color: var(--ui-graphite);
+  box-shadow: none;
+  font-weight: 700;
+}
+.app-shell .sidebar .side-user { border: 1px solid #ffffff26; }
+.app-shell .main :is(.card, .form-secao) { box-shadow: var(--shadow); }
+.app-shell .main .stat { align-items: center; }
+.app-shell .main .stat-icon { border-radius: 50%; }
+
+.app-shell .btn { border-radius: 999px; }
+.app-shell .btn:where(:not(.ghost, .orange, .danger, .danger-outline, .secondary, .outline, .success, .warning)) {
+  background: var(--ui-graphite);
+  color: #fff;
+}
+.app-shell .btn:where(:not(.ghost, .orange, .danger, .danger-outline, .secondary, .outline, .success, .warning)):hover {
+  background: #303b3d;
+}
+.app-shell :is(.btn, .machine-btn):disabled { cursor: not-allowed; }
+.app-shell .main :is(.tabs, .abas, .chips-rolagem, .period-chips) button {
+  border-radius: 999px;
+  min-height: 34px;
+  color: var(--ink);
+  background: #fff;
+}
+.app-shell .main :is(.tabs, .abas, .chips-rolagem, .period-chips) button.on {
+  background: var(--ui-graphite);
+  border-color: var(--ui-graphite);
+  color: #fff;
+}
+.app-shell .field :is(input, select, textarea):not([type=checkbox], [type=radio], [type=color], [type=file]) {
+  background-color: #f6f8f6;
+  border-color: var(--line);
+  border-radius: 12px;
+}
+.app-shell :is(a, button, summary, input, select, textarea):focus-visible {
+  outline: 2px solid #39680c;
+  outline-offset: 2px;
+}
+.app-shell .sidebar :is(a, button):focus-visible { outline-color: var(--ui-lime); }
+
+.app-shell .main .chart-box {
+  background: var(--ui-graphite);
+  color: #f6f8f6;
+  border-radius: 16px;
+  padding: 12px;
+  min-width: 0;
+}
+.app-shell .main .chart-box :is(.recharts-cartesian-axis-tick-value, .recharts-polar-angle-axis-tick-value) { fill: #c0cbcb; }
+.app-shell .main .chart-box .recharts-cartesian-grid line { stroke: #ffffff35; }
+.app-shell .main .chart-box .recharts-default-tooltip { color: var(--ink); }
+
+@media (width > 860px) {
+  .app-shell { grid-template-columns: 244px minmax(0, 1fr); }
+  .app-shell .main { padding-inline: clamp(18px, 2.5vw, 38px); }
+  .app-shell .main .topbar h2 { font-size: clamp(28px, 2.65vw, 38px); }
+}
+
+@media (width <= 860px) {
+  .app-shell .main { --ui-radius: 14px; --ui-gap: 9px; }
+  .app-shell .main .topbar h2 { font-size: clamp(22px, 5.5vw, 29px); }
+  .app-shell .bottom-nav {
+    background: #fff;
+    border-top: 1px solid var(--line);
+  }
+  .app-shell .bottom-nav :is(a, button) { border-radius: 16px; min-height: 44px; }
+  .app-shell .main :is(.tabs, .abas, .chips-rolagem, .period-chips) button { min-height: 40px; }
+  .app-shell .main .chart-box { padding: 8px; }
+}
+/* Keep series distinguishable on the dark chart background. */
+.chart-box [fill="#0f6b3c"] { fill: var(--ui-lime); }
+.chart-box [stroke="#0f6b3c"] { stroke: var(--ui-lime); }
+.chart-box [fill="#5b21b6"] { fill: #c7afff; }
+.chart-box [stroke="#5b21b6"] { stroke: #c7afff; }
+.chart-box [fill="#e36b12"] { fill: #ffb36b; }
+.chart-box [stroke="#e36b12"] { stroke: #ffb36b; }
+
