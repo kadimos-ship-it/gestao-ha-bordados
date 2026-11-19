@@ -576,10 +576,9 @@ async function pauseOrderWork(shiftId,quantity,note){
   if(!order||order.status!=='em produção'||!shift.materialChecked)return {error:'Este trabalho não pode ser pausado.'};
   const endAt=new Date().toISOString();
   const produced=(Number(order.pieces?.saida)||0)+quantity;
-  const complete=Number(order.quantity)>0&&produced>=Number(order.quantity);
   const pausedWork={...order.pieces?.pausedWork};
-  if(!complete)pausedWork[shift.userId]={shiftId,machineId:shift.machineId,service:shift.service,note:cutNote(note,"")};
-  const patch={pieces:{...order.pieces,saida:produced,pausedWork},...(complete?{status:'concluída'}:{})};
+  pausedWork[shift.userId]={shiftId,machineId:shift.machineId,service:shift.service,note:cutNote(note,"")};
+  const patch={pieces:{...order.pieces,saida:produced,pausedWork}};
   const closed={endAt,quantity,note};
   if(G){
     const saved=await $d(order.id,patch);
@@ -593,7 +592,7 @@ async function pauseOrderWork(shiftId,quantity,note){
   K={...K,orders:K.orders.map(item=>item.id===order.id?{...item,...patch}:item),
     shifts:K.shifts.map(item=>item.id===shift.id?{...item,...closed}:item)};
   up();
-  return {complete,machineId:shift.machineId};
+  return {machineId:shift.machineId};
 }
 async function resumeOrderWork(orderId,userId,machineId){
   const order=K.orders.find(item=>item.id===orderId);
