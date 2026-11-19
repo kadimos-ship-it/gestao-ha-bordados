@@ -1,0 +1,78 @@
+/* Depth and lighting for the HA Bordados palette. */
+:root {
+  --ui-deep: #101817;
+  --ui-lit: #294238;
+  --ui-panel: linear-gradient(150deg, #fff 24%, #f2f6f2);
+  --ui-raised: 0 6px 16px #17292314, 0 1px 2px #1729230d, inset 0 1px 0 #fff;
+  --ui-dark-panel: radial-gradient(ellipse at 12% 0%, #315246 0%, transparent 67%),
+    linear-gradient(150deg, #202b29, var(--ui-deep));
+  --ui-dark-shadow: 0 8px 20px #10231d26, inset 0 1px 0 #ffffff29;
+}
+
+body {
+  background: radial-gradient(ellipse at 80% 0%, #e1ece0 0%, transparent 54%), var(--paper);
+  background-attachment: fixed;
+}
+
+.app-shell .main { --ui-radius: 22px; }
+.app-shell .sidebar,
+.login-hero {
+  background: var(--ui-dark-panel);
+}
+.app-shell .sidebar .side-user { box-shadow: inset 0 1px 0 #ffffff16; }
+.app-shell .sidebar .nav a.active,
+.app-shell .bottom-nav .on {
+  background: linear-gradient(145deg, #e2ffac, var(--ui-lime) 65%, #a9dc65);
+  box-shadow: inset 0 1px 0 #fff9, 0 4px 10px #14291d23;
+}
+
+.app-shell .main :is(.card, .form-secao),
+.ordens .ordem-card,
+.login-card {
+  background-image: var(--ui-panel);
+  box-shadow: var(--ui-raised);
+}
+.ordens .ordem-card { border-radius: 15px; }
+.login-card {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(16px, 4vw, 30px);
+}
+
+:is(.app-shell, .login-page) .field :is(input, select, textarea):not([type=checkbox], [type=radio], [type=color], [type=file]) {
+  background-color: #f4f7f4;
+  border-color: #ccd9d0;
+  box-shadow: inset 0 2px 5px #1b3b2c0a;
+}
+:is(.app-shell, .login-page) .btn:where(:not(.ghost, .orange, .danger, .danger-outline, .secondary, .outline, .success, .warning)),
+.app-shell .main :is(.tabs, .abas, .chips-rolagem, .period-chips) button.on {
+  background-image: linear-gradient(155deg, var(--ui-lit), var(--ui-deep) 86%);
+  box-shadow: inset 0 1px 0 #ffffff38, 0 3px 7px #14291d2b;
+}
+:is(.app-shell, .login-page) .btn.orange {
+  background-image: linear-gradient(150deg, #b6540d, #a6440c);
+  box-shadow: inset 0 1px 0 #ffffff48, 0 3px 9px #75350e30;
+}
+:is(.app-shell, .login-page) .btn:not(:disabled):active { box-shadow: inset 0 2px 5px #10231d3b; }
+
+.app-shell .main :is(.chart-box, .timer) {
+  background: var(--ui-dark-panel);
+  box-shadow: var(--ui-dark-shadow);
+  border-radius: var(--ui-radius);
+}
+.app-shell .main .timer { color: #eef5ef; padding: 12px; }
+.app-shell .main .timer .clock { color: var(--ui-lime); }
+.app-shell .main .timer .since { color: #cedbd2; }
+
+@media (width <= 860px) {
+  .app-shell .main { --ui-radius: 16px; }
+  .app-shell .bottom-nav { box-shadow: 0 -4px 16px #17292312; }
+  .ordens .ordem-card { border-radius: 12px; }
+}
+
+@media print {
+  body { background: #fff; }
+  .app-shell .main :is(.card, .form-secao, .chart-box, .timer),
+  .ordens .ordem-card { box-shadow: none; }
+}
+
