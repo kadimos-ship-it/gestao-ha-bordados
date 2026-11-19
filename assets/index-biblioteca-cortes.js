@@ -27,6 +27,11 @@ const marcador = '\n\n[HA:tipos-de-corte]';
 const marcadorEstilos = '\n\n[HA:estilos-de-bordado]';
 const chaveCorte = nome => String(nome || '').trim().normalize('NFC').toLowerCase();
 
+const clesioCutTypes=["PLANGECON","PLANGECON serviço indústriais"];
+function isClesioClient(name){return Jp(name)==="clesio"}
+function isClientCutAllowed(name,type){
+  return isClesioClient(name)||!clesioCutTypes.some(reserved=>Jp(reserved)===Jp(type));
+}
 function readClientNotes(valor) {
   const notes = String(valor || '');
   const i = notes.lastIndexOf(marcador);
@@ -740,7 +745,7 @@ if(customerName&&!customerIds.size){
 }
 const belongsToCustomer=order=>!!customerName&&(order.clientId?customerIds.has(order.clientId):Jp(order.client)===customerName);
 const customerOrders=P.filter(belongsToCustomer);
-const customerCutTypes=customerIds.size===1?(clients||[]).find(client=>customerIds.has(client.id))?.cutTypes||[]:[];
+const customerCutTypes=customerIds.size===1?((clients||[]).find(client=>customerIds.has(client.id))?.cutTypes||[]).filter(type=>isClientCutAllowed(customer,type)):[];
 const hasCustomer=customerNames.some(name=>Jp(name)===customerName);
 const selectedOrder=customerOrders.find(order=>order.id===_);
 function changeCustomer(name){
@@ -1717,7 +1722,9 @@ function gye(){let e=xp(),[historyId,setHistoryId]=v.useState(null),[t,n]=(0,v.u
   if(!name)return a('Digite o nome do cliente.');
   const existing=Yp(name);
   if(existing&&existing.id!==e.id)return a('Já existe um cliente com esse nome.');
-  const client={...n,name,estilos:K.clients.find(client=>client.id===e.id)?.estilos||n.estilos,cutTypes:[...new Map([...normalizeCutTypes(n.cutTypesText),...(K.clients.find(client=>client.id===e.id)?.cutTypes||e.cutTypes||[])].map(type=>[Jp(type),type])).values()],id:e.id||hp('c'),createdAt:e.createdAt||new Date().toISOString()};
+  const newCuts=normalizeCutTypes(n.cutTypesText);
+  if(newCuts.some(type=>!isClientCutAllowed(name,type)))return a('Os tipos de corte PLANGECON pertencem à biblioteca do cliente Clésio.');
+  const client={...n,name,estilos:K.clients.find(client=>client.id===e.id)?.estilos||n.estilos,cutTypes:[...new Map([...newCuts,...(K.clients.find(client=>client.id===e.id)?.cutTypes||e.cutTypes||[])].map(type=>[Jp(type),type])).values()],id:e.id||hp('c'),createdAt:e.createdAt||new Date().toISOString()};
   delete client.cutTypesText;
   saving.current=true;
   a('');
@@ -1730,7 +1737,7 @@ function gye(){let e=xp(),[historyId,setHistoryId]=v.useState(null),[t,n]=(0,v.u
     if(!result.ok)return a(result.error);
     t(result.client);
   }finally{saving.current=false}
-}return(0,V.jsx)(gY,{titulo:e.id?`Editar cliente`:`Novo cliente`,onFechar:()=>t(null),rodape:(0,V.jsx)(`button`,{className:`btn orange xl`,onClick:s,children:`Salvar cliente`}),children:(0,V.jsxs)(`form`,{onSubmit:s,children:[i&&(0,V.jsx)(`div`,{className:`error`,children:i}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`Nome *`}),(0,V.jsx)(`input`,{value:n.name,onChange:e=>o(`name`,e.target.value),placeholder:`Nome ou empresa`})]}),(0,V.jsxs)(`div`,{className:`row-2 sempre`,children:[(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`WhatsApp`}),(0,V.jsx)(`input`,{type:`tel`,inputMode:`tel`,value:n.phone,onChange:e=>o(`phone`,e.target.value),placeholder:`(62) 99999-9999`})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`CPF / CNPJ`}),(0,V.jsx)(`input`,{inputMode:`numeric`,value:n.document,onChange:e=>o(`document`,e.target.value)})]})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`E-mail`}),(0,V.jsx)(`input`,{type:`email`,value:n.email,onChange:e=>o(`email`,e.target.value)})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`Endereço`}),(0,V.jsx)(`input`,{value:n.address,onChange:e=>o(`address`,e.target.value),placeholder:`Rua, número, bairro, cidade`})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`Observações`}),(0,V.jsx)(`textarea`,{value:n.notes,onChange:e=>o(`notes`,e.target.value),placeholder:`Preferências, tamanho de logo, linhas usadas...`})]}),V.jsxs("div",{className:"field",children:[V.jsx("label",{htmlFor:"cliente-tipos-corte",children:"Adicionar tipos de corte"}),(e.cutTypes||[]).length>0&&V.jsx("ul",{"aria-label":"Tipos de corte cadastrados",children:e.cutTypes.map(type=>V.jsx("li",{children:type},type))}),V.jsx("textarea",{id:"cliente-tipos-corte",rows:3,value:n.cutTypesText,onChange:event=>o("cutTypesText",event.target.value),placeholder:"Um novo tipo de corte por linha"}),V.jsx("div",{className:"period-chips",role:"group","aria-label":"Sugestões de corte",children:["PLANGECON","PLANGECON serviço indústriais"].map(type=>{
+}return(0,V.jsx)(gY,{titulo:e.id?`Editar cliente`:`Novo cliente`,onFechar:()=>t(null),rodape:(0,V.jsx)(`button`,{className:`btn orange xl`,onClick:s,children:`Salvar cliente`}),children:(0,V.jsxs)(`form`,{onSubmit:s,children:[i&&(0,V.jsx)(`div`,{className:`error`,children:i}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`Nome *`}),(0,V.jsx)(`input`,{value:n.name,onChange:e=>o(`name`,e.target.value),placeholder:`Nome ou empresa`})]}),(0,V.jsxs)(`div`,{className:`row-2 sempre`,children:[(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`WhatsApp`}),(0,V.jsx)(`input`,{type:`tel`,inputMode:`tel`,value:n.phone,onChange:e=>o(`phone`,e.target.value),placeholder:`(62) 99999-9999`})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`CPF / CNPJ`}),(0,V.jsx)(`input`,{inputMode:`numeric`,value:n.document,onChange:e=>o(`document`,e.target.value)})]})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`E-mail`}),(0,V.jsx)(`input`,{type:`email`,value:n.email,onChange:e=>o(`email`,e.target.value)})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`Endereço`}),(0,V.jsx)(`input`,{value:n.address,onChange:e=>o(`address`,e.target.value),placeholder:`Rua, número, bairro, cidade`})]}),(0,V.jsxs)(`div`,{className:`field`,children:[(0,V.jsx)(`label`,{children:`Observações`}),(0,V.jsx)(`textarea`,{value:n.notes,onChange:e=>o(`notes`,e.target.value),placeholder:`Preferências, tamanho de logo, linhas usadas...`})]}),V.jsxs("div",{className:"field",children:[V.jsx("label",{htmlFor:"cliente-tipos-corte",children:"Adicionar tipos de corte"}),(e.cutTypes||[]).length>0&&V.jsx("ul",{"aria-label":"Tipos de corte cadastrados",children:e.cutTypes.map(type=>V.jsx("li",{children:type},type))}),V.jsx("textarea",{id:"cliente-tipos-corte",rows:3,value:n.cutTypesText,onChange:event=>o("cutTypesText",event.target.value),placeholder:"Um novo tipo de corte por linha"}),isClesioClient(n.name)&&V.jsx("div",{className:"period-chips",role:"group","aria-label":"Sugestões de corte",children:clesioCutTypes.map(type=>{
     const pending=String(n.cutTypesText||"").split(/\r?\n/).map(item=>item.trim()).filter(Boolean);
     const exists=[...(e.cutTypes||[]),...pending].some(item=>Jp(item)===Jp(type));
     return V.jsx("button",{type:"button",disabled:exists,onClick:()=>o("cutTypesText",[...pending,type].join("\n")),children:type},type);
