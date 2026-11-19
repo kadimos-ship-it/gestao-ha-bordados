@@ -11,3 +11,6 @@
 .production-queue-block small{color:var(--muted)}
 .production-queue-block .btn{margin-top:auto;align-self:flex-start;min-height:40px}
 
+
+.production-queue-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.production-queue-column{min-width:0}.production-queue-column>h4{margin:0 0 10px;color:#a32319}.production-queue-column.is-running>h4{color:#146c32}.production-queue-operators{font-size:13px;font-weight:600;overflow-wrap:anywhere}@media(max-width:600px){.production-queue-columns{grid-template-columns:minmax(0,1fr)}}
+
