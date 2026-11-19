@@ -1,0 +1,9 @@
+.app-shell .main .customer-production { align-self: start; padding: 12px; min-width: 0; }
+.customer-production .section-title { display: flex; justify-content: space-between; gap: 8px; }
+.customer-production-list { list-style: none; margin: 0; padding: 0; }
+.customer-production-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; padding: 6px 2px; align-items: center; border-bottom: 1px solid var(--line); }
+.customer-production-row small { display:block; color: var(--muted); font-size: 12px; }
+.customer-production-row strong { font-size: 14px; overflow-wrap: anywhere; }
+.customer-production-value { color: var(--green-800); font-size: 13px; font-variant-numeric: tabular-nums; font-weight: 750; }
+.customer-production-total { background: var(--green-100); padding: 7px 9px; border: 0; border-radius: 10px; margin-top: 7px; }
+.customer-production-more summary { min-height: 36px; padding: 8px 2px; cursor: pointer; font-weight: 650; }
